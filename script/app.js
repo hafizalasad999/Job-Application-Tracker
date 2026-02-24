@@ -128,6 +128,26 @@ mainContainer.addEventListener('click', function(event){
         }
         totalCount()
     }
+    // 
+    else if(event.target.closest('.deleteBtn')){
+    const card = event.target.closest('.flex.justify-between');
+    const head = card.querySelector('.headTags').innerText;
+
+    //remove
+    card.remove();
+
+    interviewCount = interviewCount.filter(item => item.headTags != head);
+    rejectedCount = rejectedCount.filter(item => item.headTags != head);
+
+    totalCount();
+
+    if(allCurrent == 'btn-interview'){
+        renderInterview()
+    }
+    if(allCurrent == 'btn-rejected'){
+        renderRejected()
+    }
+}
 });
 
 // filter Card section ->interviewCount
@@ -151,11 +171,11 @@ function renderInterview(){
                 <p class="paragraph text-[14px] text-[#323B49] mt-2">${interview.paragraph}</p>
                 <div class="flex gap-2 mt-[20px]">
                     <button class="interviewBtn btn btn-soft btn-success text-[14px] font-bold">interview</button>
-                    <button class="btn btn-soft btn-error text-[14px] font-bold">Rejected</button>
+                    <button class="rejectedBtn btn btn-soft btn-error text-[14px] font-bold">Rejected</button>
                 </div>
              </div>
             <div>
-                <button class="btn rounded-full px-2 py-2 text-[#64748B]"><i class="fa-regular fa-trash-can"></i></button>
+                <button class="deleteBtn btn rounded-full px-2 py-2 text-[#64748B]"><i class="fa-regular fa-trash-can"></i></button>
             </div>
         `
         filterCardSection.appendChild(div)
@@ -182,11 +202,11 @@ function renderRejected(){
                 <p class="paragraph text-[14px] text-[#323B49] mt-2">${rejecteds.paragraph}</p>
                 <div class="flex gap-2 mt-[20px]">
                     <button class="interviewBtn btn btn-soft btn-success text-[14px] font-bold">interview</button>
-                    <button class="btn btn-soft btn-error text-[14px] font-bold">Rejected</button>
+                    <button class="rejectedBtn btn btn-soft btn-error text-[14px] font-bold">Rejected</button>
                 </div>
              </div>
             <div>
-                <button class="btn rounded-full px-2 py-2 text-[#64748B]"><i class="fa-regular fa-trash-can"></i></button>
+                <button class="deleteBtn btn rounded-full px-2 py-2 text-[#64748B]"><i class="fa-regular fa-trash-can"></i></button>
             </div>
         `
         filterCardSection.appendChild(div)
